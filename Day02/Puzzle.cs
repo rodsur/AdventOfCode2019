@@ -21,7 +21,7 @@ namespace Day02
 
         private int[] initInput()
         {
-            string[] inputarr = File.ReadAllText(_day + "/input").Split(",");
+            string[] inputarr = File.ReadAllText("input").Split(",");
             int[] outputarr = new int[inputarr.Length];
             for (int i = 0; i < inputarr.Length; i++)
             {
@@ -33,6 +33,8 @@ namespace Day02
         public void run()
         {
             Part1();
+            Part2();
+            Console.WriteLine("");
         }
 
         private void Part1()
@@ -41,10 +43,34 @@ namespace Day02
             _input[2] = 2;
             runProgram();
             Console.WriteLine(_input[0]);
+            
+        }
+
+        private void Part2()
+        {
+            
+            for (int noun = 0; noun < _input.Length; noun++)
+            {
+                for (int verb = 0; verb < _input.Length; verb++)
+                {
+                    _input = initInput();
+                    _input[1] = noun;
+                    _input[2] = verb;
+                    runProgram();
+                    
+                    if (_input[0] == 19690720)
+                    {
+                        Console.WriteLine("noun: " + _input[1] + " verb: " + _input[2]);
+                        Console.WriteLine("Result = " + _input[0]);
+                        return;
+                    }
+                }
+            }
         }
 
         private void runProgram()
         {
+            _pc = 0;
             bool running = true;
             while (running)
             {
@@ -55,25 +81,25 @@ namespace Day02
                 switch (cmd)
                 {
                     case(1):
-                        Console.WriteLine("Running add command at: " + _pc);
-                        Console.WriteLine("Args: " + arg1 + " " + arg2);
-                        Console.WriteLine("Save pos: " + savepos);
+//                        Console.WriteLine("Running add command at: " + _pc);
+//                        Console.WriteLine("Args: " + arg1 + " " + arg2);
+//                        Console.WriteLine("Save pos: " + savepos);
                         add(arg1, arg2, savepos);
-                        Console.WriteLine("Result at " + savepos +": " + _input[savepos]);
+//                        Console.WriteLine("Result at " + savepos +": " + _input[savepos]);
                         break;
                     case(2):
-                        Console.WriteLine("Running multiply command at: " + _pc);
-                        Console.WriteLine("Args: " + arg1 + " " + arg2);
-                        Console.WriteLine("Save pos: " + _input[_pc+3]);
+//                        Console.WriteLine("Running multiply command at: " + _pc);
+//                        Console.WriteLine("Args: " + arg1 + " " + arg2);
+//                        Console.WriteLine("Save pos: " + _input[_pc+3]);
                         mult(arg1,arg2,savepos);
                         break;
                     case(99):
-                        Console.WriteLine("Halting...");
+//                        Console.WriteLine("Halting...");
                         running = false;
                         break;
                     default:
                         running = false;
-                        Console.WriteLine("Unsupported Operation");
+//                        Console.WriteLine("Unsupported Operation: " + cmd + " at pos: " + _pc);
                         break;
                 }
                 _pc += 4;
