@@ -8,9 +8,9 @@ namespace AdventOfCode
         private String[] _input;
         private Wire[] _wires;
 
-        public void Run()
+        public int Run()
         {
-            throw new System.NotImplementedException();
+            return _wires[0].calculateDistance(_wires[0].CheckCollision(_wires[1]));
         }
 
         public void LoadInput(string[] input)

@@ -4,7 +4,7 @@ namespace AdventOfCode
 {
     public interface IPuzzle
     {
-        void Run();
+        int Run();
         void LoadInput(String[] input);
         
     }
