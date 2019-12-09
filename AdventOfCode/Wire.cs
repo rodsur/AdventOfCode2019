@@ -63,7 +63,7 @@ namespace AdventOfCode
             return intersections;
         }
 
-        public int calculateDistance(List<Intersection> list)
+        public int CalculateDistance(List<Intersection> list)
         {
             int lowestDistance = 0;
             foreach (var intersection in list)
@@ -81,7 +81,7 @@ namespace AdventOfCode
             return lowestDistance;
         }
         
-        public int calculateDistance(List<(int,int)> list)
+        public int CalculateDistance(List<(int,int)> list)
         {
             List<Intersection> intersections = new List<Intersection>();
             foreach (var item in list)
@@ -89,7 +89,7 @@ namespace AdventOfCode
                 intersections.Add(new Intersection(item.Item1,item.Item2));
             }
 
-            return calculateDistance(intersections);
+            return CalculateDistance(intersections);
         }
 
         public List<(int, int)> CheckIntersections(Wire wire)
@@ -98,6 +98,24 @@ namespace AdventOfCode
             List<(int,int)> returnlist= new List<(int, int)>();
             returnlist.AddRange(_points.Intersect(wire._points));
             return returnlist;
+        }
+
+
+        public int CalculateShortestDelay(Wire wire)
+        {
+            int shortestDelay = 0;
+            List<(int x, int y)> intersectionList = CheckIntersections(wire);
+            foreach (var intersection in intersectionList)
+            {
+                int distance = wire._points.IndexOf((intersection.x, intersection.y)) +
+                               this._points.IndexOf((intersection.x, intersection.y));
+                if (shortestDelay == 0 || distance < shortestDelay)
+                {
+                    shortestDelay = distance;
+                }
+            }
+
+            return shortestDelay;
         }
     }
 }

@@ -2,15 +2,14 @@ using System;
 
 namespace AdventOfCode
 {
-    public class Day3Part1 : IPuzzle
+    public class Day3Part2
     {
-
         private String[] _input;
         private Wire[] _wires;
 
         public int Run()
         {
-            return _wires[0].CalculateDistance(_wires[0].CheckIntersections(_wires[1]));
+            return _wires[0].CalculateShortestDelay(_wires[1]);
         }
 
         public void LoadInput(string[] input)

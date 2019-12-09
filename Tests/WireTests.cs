@@ -42,12 +42,12 @@ namespace Tests
         {
             List<Intersection> intersections = new List<Intersection>();
             intersections.Add(new Intersection(5,8));
-            Assert.AreEqual(13,wire1.calculateDistance(intersections));
+            Assert.AreEqual(13,wire1.CalculateDistance(intersections));
             intersections.Clear();
             intersections.Add(new Intersection(135,37));
-            Assert.AreEqual(172,wire1.calculateDistance(intersections));
+            Assert.AreEqual(172,wire1.CalculateDistance(intersections));
             intersections.Add(new Intersection(135,30));
-            Assert.AreEqual(165,wire1.calculateDistance(intersections));
+            Assert.AreEqual(165,wire1.CalculateDistance(intersections));
         }
 
         [Test]
