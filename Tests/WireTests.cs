@@ -30,7 +30,10 @@ namespace Tests
         public void IntersectionsTest()
         {
             List<Intersection> intersections = new List<Intersection>();
+            List<(int,int)> intersectionlist = new List<(int, int)>();
             intersections.AddRange(wire1.CheckCollision(wire2));
+            intersectionlist.AddRange(wire1.CheckIntersections(wire2));
+            Assert.AreEqual(2,intersections.Count);
             Assert.AreEqual(2,intersections.Count);
         }
 

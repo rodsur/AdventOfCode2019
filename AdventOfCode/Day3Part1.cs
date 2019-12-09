@@ -10,6 +10,7 @@ namespace AdventOfCode
 
         public int Run()
         {
+            return _wires[0].calculateDistance(_wires[0].CheckIntersections(_wires[1]));
             return _wires[0].calculateDistance(_wires[0].CheckCollision(_wires[1]));
         }
 
