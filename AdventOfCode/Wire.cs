@@ -6,7 +6,6 @@ namespace AdventOfCode
 {
     public class Wire
     {
-        public List<Segment> _segments { get; }
         public List<(int x,int y)> _points { get; }
 
         public Wire(string input)
@@ -15,11 +14,8 @@ namespace AdventOfCode
             int[] start = new[] {0, 0};
             _points = new List<(int, int)>();
             _points.Add((0,0));
-            _segments = new List<Segment>();
             foreach (var segment in Directions)
             {
-                _segments.Add(new Segment(start,segment[0],Int32.Parse(segment.Substring(1))));
-                start = _segments[^1].getEnd();
                 for (int i = 0; i < Int32.Parse(segment.Substring(1)); i++)
                 {
                     var lastPoint = _points[^1];
@@ -41,30 +37,11 @@ namespace AdventOfCode
                     }
                 }
             }
-            /*
-            foreach (var point in _points)
-            {
-                Console.WriteLine("x: " + point.x + ", y: " + point.y);
-            }
-            Console.WriteLine("Wire done");
-            */
         }
 
-        public List<Intersection> CheckCollision(Wire wire)
+        public int CalculateDistance(List<(int x,int y)> list)
         {
-            List<Intersection> intersections = new List<Intersection>();
-            foreach (var segment in _segments)
-            {
-                foreach (var wireSegment in wire._segments)
-                {
-                    intersections.AddRange(segment.checkIntersections(wireSegment));
-                }
-            }
-            return intersections;
-        }
-
-        public int CalculateDistance(List<Intersection> list)
-        {
+            
             int lowestDistance = 0;
             foreach (var intersection in list)
             {
@@ -79,17 +56,6 @@ namespace AdventOfCode
             }
 
             return lowestDistance;
-        }
-        
-        public int CalculateDistance(List<(int,int)> list)
-        {
-            List<Intersection> intersections = new List<Intersection>();
-            foreach (var item in list)
-            {
-                intersections.Add(new Intersection(item.Item1,item.Item2));
-            }
-
-            return CalculateDistance(intersections);
         }
 
         public List<(int, int)> CheckIntersections(Wire wire)
